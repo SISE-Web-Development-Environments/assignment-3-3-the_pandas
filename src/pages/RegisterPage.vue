@@ -277,8 +277,18 @@ export default {
             confirmedPassword: this.form.confirmedPassword,
           }
         );
-        this.$router.push("/login");
-        // console.log(response);
+        console.log(response);
+        if (
+          response.data ===
+          "Username already exists. Login or use a different username."
+        ) {
+          console.log(
+            "Username already exists. Login or use a different username."
+          );
+          this.form.submitError =
+            "Username already exists. Login or use a different username.";
+          return;
+        } else this.$router.push("/login");
       } catch (err) {
         console.log(err.response);
         this.form.submitError = err.response.data.message;
