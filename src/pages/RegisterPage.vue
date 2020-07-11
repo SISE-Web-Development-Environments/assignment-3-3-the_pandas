@@ -26,6 +26,74 @@
       </b-form-group>
 
       <b-form-group
+        id="input-group-firstName"
+        label-cols-sm="3"
+        label="First name:"
+        label-for="firstName"
+      >
+        <b-form-input
+          id="firstName"
+          v-model="$v.form.firstName.$model"
+          type="text"
+          :state="validateState('firstName')"
+        ></b-form-input>
+        <b-form-invalid-feedback v-if="!$v.form.firstName.required">
+          firstName is required
+        </b-form-invalid-feedback>
+      </b-form-group>
+
+      <b-form-group
+        id="input-group-lastName"
+        label-cols-sm="3"
+        label="Last name:"
+        label-for="lastName"
+      >
+        <b-form-input
+          id="lastName"
+          v-model="$v.form.lastName.$model"
+          type="text"
+          :state="validateState('lastName')"
+        ></b-form-input>
+        <b-form-invalid-feedback v-if="!$v.form.lastName.required">
+          lastName is required
+        </b-form-invalid-feedback>
+      </b-form-group>
+
+      <b-form-group
+        id="input-group-email"
+        label-cols-sm="3"
+        label="Email:"
+        label-for="email"
+      >
+        <b-form-input
+          id="email"
+          v-model="$v.form.email.$model"
+          type="text"
+          :state="validateState('email')"
+        ></b-form-input>
+        <b-form-invalid-feedback v-if="!$v.form.email.required">
+          email is required
+        </b-form-invalid-feedback>
+      </b-form-group>
+
+      <b-form-group
+        id="input-group-photo"
+        label-cols-sm="3"
+        label="Photo:"
+        label-for="photo"
+      >
+        <b-form-input
+          id="photo"
+          v-model="$v.form.photo.$model"
+          type="text"
+          :state="validateState('photo')"
+        ></b-form-input>
+        <b-form-invalid-feedback v-if="!$v.form.photo.required">
+          photo is required
+        </b-form-invalid-feedback>
+      </b-form-group>
+
+      <b-form-group
         id="input-group-country"
         label-cols-sm="3"
         label="Country:"
@@ -127,7 +195,7 @@ import {
   maxLength,
   alpha,
   sameAs,
-  email
+  email,
 } from "vuelidate/lib/validators";
 
 export default {
@@ -142,11 +210,12 @@ export default {
         password: "",
         confirmedPassword: "",
         email: "",
-        submitError: undefined
+        photo: "",
+        submitError: undefined,
       },
       countries: [{ value: null, text: "", disabled: true }],
       errors: [],
-      validated: false
+      validated: false,
     };
   },
   validations: {
@@ -154,20 +223,34 @@ export default {
       username: {
         required,
         length: (u) => minLength(3)(u) && maxLength(8)(u),
-        alpha
+        alpha,
       },
       country: {
-        required
+        required,
       },
       password: {
         required,
-        length: (p) => minLength(5)(p) && maxLength(10)(p)
+        length: (p) => minLength(5)(p) && maxLength(10)(p),
       },
       confirmedPassword: {
         required,
-        sameAsPassword: sameAs("password")
-      }
-    }
+        sameAsPassword: sameAs("password"),
+      },
+      firstName: {
+        required,
+        length: (u) => minLength(3)(u) && maxLength(8)(u),
+      },
+      lastName: {
+        required,
+      },
+      email: {
+        required,
+        email,
+      },
+      photo: {
+        required,
+      },
+    },
   },
   mounted() {
     // console.log("mounted");
@@ -182,10 +265,16 @@ export default {
     async Register() {
       try {
         const response = await this.axios.post(
-          "https://test-for-3-2.herokuapp.com/user/Register",
+          "https://panda-recipes.herokuapp.com/register",
           {
-            username: this.form.username,
-            password: this.form.password
+            userName: this.form.username,
+            password: this.form.password,
+            firstName: this.form.firstName,
+            lastName: this.form.lastName,
+            email: this.form.email,
+            country: this.form.country,
+            linkimage: this.form.photo,
+            confirmedPassword: this.form.confirmedPassword,
           }
         );
         this.$router.push("/login");
@@ -212,13 +301,14 @@ export default {
         country: null,
         password: "",
         confirmedPassword: "",
-        email: ""
+        email: "",
+        photo: "",
       };
       this.$nextTick(() => {
         this.$v.$reset();
       });
-    }
-  }
+    },
+  },
 };
 </script>
 <style lang="scss" scoped>
