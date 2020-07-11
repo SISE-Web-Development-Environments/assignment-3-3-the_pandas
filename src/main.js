@@ -62,6 +62,7 @@ axios.interceptors.response.use(
   }
 );
 
+axios.defaults.withCredentials = false;
 Vue.use(VueAxios, axios);
 
 Vue.config.productionTip = false;

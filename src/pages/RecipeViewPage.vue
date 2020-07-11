@@ -15,10 +15,10 @@
             Ingredients:
             <ul>
               <li
-                v-for="(r, index) in recipe.extendedIngredients"
+                v-for="(r, index) in recipe.JsonIngredients"
                 :key="index + '_' + r.id"
               >
-                {{ r.original }}
+                {{ r.NameAndAmount }}
               </li>
             </ul>
           </div>
@@ -26,7 +26,7 @@
             Instructions:
             <ol>
               <li v-for="s in recipe._instructions" :key="s.number">
-                {{ s.step }}
+                {{ s.step  }}
               </li>
             </ol>
           </div>
@@ -52,16 +52,14 @@ export default {
     try {
       let response;
       // response = this.$route.params.response;
-
+      console.log(this.$route.params.recipeId)
       try {
         response = await this.axios.get(
-          "https://test-for-3-2.herokuapp.com/recipes/info",
-          {
-            params: { id: this.$route.params.recipeId }
-          }
+          "https://panda-recipes.herokuapp.com/recipes/search/"+this.$route.params.recipeId          
         );
 
-        // console.log("response.status", response.status);
+        console.log("response.status", response.status);
+        console.log(response);
         if (response.status !== 200) this.$router.replace("/NotFound");
       } catch (error) {
         console.log("error.response.status", error.response.status);
@@ -72,14 +70,14 @@ export default {
       let {
         analyzedInstructions,
         instructions,
-        extendedIngredients,
+        JsonIngredients,
         aggregateLikes,
         readyInMinutes,
         image,
         title
-      } = response.data.recipe;
+      } = response.data[0];
 
-      let _instructions = analyzedInstructions
+      let _instructions = instructions
         .map((fstep) => {
           fstep.steps[0].step = fstep.name + fstep.steps[0].step;
           return fstep.steps;
@@ -90,7 +88,7 @@ export default {
         instructions,
         _instructions,
         analyzedInstructions,
-        extendedIngredients,
+        JsonIngredients,
         aggregateLikes,
         readyInMinutes,
         image,
