@@ -2,8 +2,13 @@ module.exports = {
   configureWebpack: {
     devtool: "source-map"
   },
-  devServer: {
-    host: "localhost"
+  devServer: { 
+    proxy: {
+    '/api': { target :"https://panda-recipes.herokuapp.com",
+      ws: true,
+      changeOrigin: true
+    }
   }
-  // publicPath: process.env.NODE_ENV === "production" ? "/LAB12/" : "/"
+  }
 };
+

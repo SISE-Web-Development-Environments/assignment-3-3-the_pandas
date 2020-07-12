@@ -95,13 +95,14 @@ export default {
       try {
         const response = await this.axios.post(
           "https://panda-recipes.herokuapp.com/login",
+          // "http://localhost:4000/login",
           {
             userName: this.form.username,
             password: this.form.password
           }
         );
-        console.log(response);
         // this.$root.loggedIn = true;
+        // console.log(window.$cookies.get("session"));
         console.log(this.$root.store.login);
         this.$root.store.login(this.form.username);
         this.$router.push("/");

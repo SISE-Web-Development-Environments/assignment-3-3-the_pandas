@@ -21,13 +21,26 @@
 export default {
   name: "App",
   methods: {
-    Logout() {
-      this.$root.store.logout();
-      this.$root.toast("Logout", "User logged out successfully", "success");
-
-      this.$router.push("/").catch(() => {
-        this.$forceUpdate();
-      });
+    async Logout() {
+      try {
+        const response = await this.axios.post(
+          "https://panda-recipes.herokuapp.com/Logout"
+        );
+        // this.$root.loggedIn = true;
+        // console.log(window.$cookies.get("session"));
+        this.$root.store.logout();
+        this.$root.toast("Logout", "User logged out successfully", "success");
+        // console.log(this.$root.store.login);
+        // this.$router.push("/");
+      } catch (err) {
+        console.log(err.response);
+        this.form.submitError = err.response.data.message;
+      }
+      // this.$root.store.logout();
+      // this.$root.toast("Logout", "User logged out successfully", "success");
+      // this.$router.push("/").catch(() => {
+      //   this.$forceUpdate();
+      // });
     }
   }
 };

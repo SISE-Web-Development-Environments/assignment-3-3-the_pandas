@@ -55,9 +55,10 @@ export default {
       console.log(this.$route.params.recipeId)
       try {
         response = await this.axios.get(
-          "https://panda-recipes.herokuapp.com/recipes/search/"+this.$route.params.recipeId          
+          "https://panda-recipes.herokuapp.com/recipes/search/"+this.$route.params.recipeId       
+                    // "http://localhost:4000/recipes/search/"+this.$route.params.recipeId          
+   
         );
-
         console.log("response.status", response.status);
         console.log(response);
         if (response.status !== 200) this.$router.replace("/NotFound");

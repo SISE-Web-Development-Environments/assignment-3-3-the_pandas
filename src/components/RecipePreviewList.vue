@@ -38,6 +38,7 @@ export default {
       try {
         const response = await this.axios.get(
           "https://panda-recipes.herokuapp.com/recipes/"
+          // "http://localhost:4000/recipes"
         );
 
         console.log(response);
