@@ -4,6 +4,7 @@
       <div class="recipe-header mt-3 mb-4">
         <h1>{{ recipe.title }}</h1>
         <img :src="recipe.image" class="center" />
+        <button @click="SaveRecipe" class="center">Save as favorite</button>
       </div>
       <div class="recipe-body">
         <div class="wrapper">
@@ -56,8 +57,7 @@ export default {
       try {
         response = await this.axios.get(
           "https://panda-recipes.herokuapp.com/recipes/search/"+this.$route.params.recipeId       
-                    // "http://localhost:4000/recipes/search/"+this.$route.params.recipeId          
-   
+          // "http://localhost:4000/recipes/search/"+this.$route.params.recipeId          
         );
         console.log("response.status", response.status);
         console.log(response);
@@ -100,6 +100,24 @@ export default {
     } catch (error) {
       console.log(error);
     }
+  },
+  methods:{
+    async SaveRecipe() {
+      try {
+        response = await this.axios.get(
+          "https://panda-recipes.herokuapp.com/users/Favorite/"+this.$route.params.recipeId       
+            // "http://localhost:4000/users/Favorite/"+this.$route.params.recipeId
+);
+        // console.log("response.status", response.status);
+        console.log(response);
+        // if (response.status !== 200) this.$router.replace("/NotFound");
+      } catch (error) {
+        console.log("error.response.status", error.response.status);
+        this.$router.replace("/NotFound");
+        return;
+      }
+
+    }
   }
 };
 </script>
@@ -114,6 +132,7 @@ export default {
 .center {
   display: block;
   margin-left: auto;
+  margin-top: 5px;
   margin-right: auto;
   width: 50%;
 }
