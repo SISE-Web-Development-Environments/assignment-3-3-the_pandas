@@ -75,13 +75,13 @@ export default {
   margin-left: auto;
   margin-right: auto;
   margin-top: auto;
-  margin-bottom: auto;
+  margin-bottom: 5px;
   display: block;
-  width: 98%;
-  height: auto;
-  -webkit-background-size: cover;
+  width: 300px;
+  height: 240px;
+  /* -webkit-background-size: cover;
   -moz-background-size: cover;
-  background-size: cover;
+  background-size: cover; */
 }
 
 .recipe-preview .recipe-footer {
@@ -92,9 +92,9 @@ export default {
 
 .recipe-preview .recipe-footer .recipe-title {
   padding: 10px 10px;
-  width: 100%;
+  margin-top: 30px;
   font-size: 12pt;
-  text-align: left;
+  text-align: center;
   white-space: nowrap;
   overflow: hidden;
   -o-text-overflow: ellipsis;

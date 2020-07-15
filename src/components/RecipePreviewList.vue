@@ -40,7 +40,7 @@ export default {
           "https://panda-recipes.herokuapp.com/recipes/"
           // "http://localhost:4000/recipes"
         );
-
+        
         console.log(response);
         const recipesArray = response.data;
         console.log(recipesArray);
