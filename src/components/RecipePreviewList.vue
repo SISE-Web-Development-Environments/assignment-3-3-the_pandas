@@ -17,17 +17,17 @@ import RecipePreview from "./RecipePreview.vue";
 export default {
   name: "RecipePreviewList",
   components: {
-    RecipePreview
+    RecipePreview,
   },
   props: {
     title: {
       type: String,
-      required: true
-    }
+      required: true,
+    },
   },
   data() {
     return {
-      recipes: []
+      recipes: [],
     };
   },
   mounted() {
@@ -49,8 +49,8 @@ export default {
       } catch (error) {
         console.log(error);
       }
-    }
-  }
+    },
+  },
 };
 </script>
 
