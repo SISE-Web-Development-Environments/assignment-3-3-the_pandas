@@ -48,6 +48,9 @@ export default {
         console.log(error);
       }
     },
+    reload() {
+      this.updateRecipes();
+    }
   },
 };
 </script>

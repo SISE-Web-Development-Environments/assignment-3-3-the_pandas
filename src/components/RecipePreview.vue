@@ -16,8 +16,22 @@
       <b-col>
         <ul>
          <div class="recipe-footer">
-        <li>Ready in: {{ recipe.readyInMinutes }} minutes</li>
-        <li>Likes: {{ recipe.aggregateLikes }} likes</li>
+          <img id="clock" src="https://cdn.iconscout.com/icon/premium/png-256-thumb/clock-2578618-2148597.png" />
+          {{ recipe.readyInMinutes }} minutes
+          <br>
+          <img id="clock" src="https://icons-for-free.com/iconfiles/png/512/done+downloaded+icon-1320086210484717001.png" />
+          {{ recipe.aggregateLikes }} likes
+           <br>
+          <img v-if="recipe.vegetarian" id="clock" src="https://cdn4.iconfinder.com/data/icons/fabric-features-clothes-materials-blue-line-2/64/413_eco-bio-ecology-leaf-512.png" />
+          <img v-if="recipe.glutenFree" id="clock" src="https://cdn1.iconfinder.com/data/icons/eco-food-and-cosmetic-labels/128/Artboard_15-2-128.png" />
+          <img v-if="recipe.Viewed" id="clock" src="https://cdn.iconscout.com/icon/premium/png-512-thumb/eye-382-326435.png" />
+          <br>
+          <br>
+          
+          <br>
+          <img  v-if="recipe.Saved"   id="Favorite"  src="https://cdn3.iconfinder.com/data/icons/gradient-circle/36/5122-512.png" />
+          <img  v-else @click="SaveRecipe(recipe.id)" id="Favorite"  src="https://cdn0.iconfinder.com/data/icons/e-commerce-207/1024/heart-512.png" />
+          <!-- https://cdn3.iconfinder.com/data/icons/gradient-circle/36/5122-512.png https://www.pngkey.com/png/full/293-2934876_heart-gradient-love-heart-symbol.png -->
         </div>
         </ul>
       </b-col>
@@ -28,6 +42,8 @@
   
 </template>
 
+
+// https://webcomicms.net/sites/default/files/clipart/162591/pink-leaf-cliparts-162591-5527686.png
 <script>
 export default {
   data() {
@@ -63,15 +79,35 @@ export default {
     //     return undefined;
     //   }
     // }
-  }
+  },
+  methods: {
+    async SaveRecipe(id) {
+      try {
+        console.log("im doing it   " + id);
+        const response = await this.axios.get(
+          "https://panda-recipes.herokuapp.com/users/Favorite/" +
+            id
+          // "http://localhost:4000/users/Favorite/"+this.$route.params.recipeId
+        );
+        console.log("response.status", response.status);
+        console.log(response);
+        if (response.status !== 200) this.$router.replace("/NotFound");
+      } catch (error) {
+        console.log("error.response.status", error.response.status);
+        this.$router.replace("/NotFound");
+        return;
+      }
+    },
+  },
 };
 </script>
 
 <style scoped>
 .recipe-preview {
   display: inline-block;
-  width: 75%;
+  width: 100%;
   height: 100%;
+  outline: 2px solid white;
   position: relative;
   margin: 10px 10px;
   background-color: rgb(214, 35, 95);
@@ -97,11 +133,21 @@ export default {
   margin-top: auto;
   margin-bottom: 5px;
   display: block;
-  width: 300px;
-  height: 240px;
+  width: 250px;
+  height:180px;
   /* -webkit-background-size: cover;
   -moz-background-size: cover;
   background-size: cover; */
+}
+
+#clock {
+   width: 25px;
+  height:25px;
+}
+#Favorite {
+   width: 25px;
+  height:25px;
+  margin-left: 37%;
 }
 
 .recipe-preview .recipe-footer {
@@ -112,7 +158,7 @@ export default {
 
 .recipe-title {
   color: white;
-  margin-left: 30%;
+  margin-left: 0%;
 }
 
 .recipe-preview .recipe-footer .recipe-title {
