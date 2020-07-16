@@ -3,19 +3,29 @@
     :to="{ name: 'recipe', params: { recipeId: recipe.id } }"
     class="recipe-preview"
   >
-    <div class="recipe-body">
-      <img :src="recipe.image" class="recipe-image" />
-    </div>
-    <div class="recipe-footer">
-      <div :title="recipe.title" class="recipe-title">
+  <b-container>
+     <div :title="recipe.title" class="recipe-title">
         {{ recipe.title }}
       </div>
-      <ul class="recipe-overview">
-        <li>{{ recipe.readyInMinutes }} minutes</li>
-        <li>{{ recipe.aggregateLikes }} likes</li>
-      </ul>
-    </div>
+      <b-row>
+      <b-col >
+        <div class="recipe-body">
+          <img :src="recipe.image" class="recipe-image" />
+        </div>
+      </b-col>
+      <b-col>
+        <ul>
+         <div class="recipe-footer">
+        <li>Ready in: {{ recipe.readyInMinutes }} minutes</li>
+        <li>Likes: {{ recipe.aggregateLikes }} likes</li>
+        </div>
+        </ul>
+      </b-col>
+      </b-row>
+  </b-container>
+ 
   </router-link>
+  
 </template>
 
 <script>
@@ -60,10 +70,11 @@ export default {
 <style scoped>
 .recipe-preview {
   display: inline-block;
-  width: 90%;
+  width: 75%;
   height: 100%;
   position: relative;
   margin: 10px 10px;
+  background-color: rgb(214, 35, 95);
 }
 .recipe-preview > .recipe-body {
   width: 100%;
@@ -71,7 +82,16 @@ export default {
   position: relative;
 }
 
-.recipe-preview .recipe-body .recipe-image {
+.recipe-footer {
+  color:white;
+  float: right;
+  padding: 15px;
+}
+.recipe-body{
+
+  float: left;
+}
+.recipe-preview  .recipe-image {
   margin-left: auto;
   margin-right: auto;
   margin-top: auto;
@@ -88,6 +108,11 @@ export default {
   width: 100%;
   height: 50%;
   overflow: hidden;
+}
+
+.recipe-title {
+  color: white;
+  margin-left: 30%;
 }
 
 .recipe-preview .recipe-footer .recipe-title {

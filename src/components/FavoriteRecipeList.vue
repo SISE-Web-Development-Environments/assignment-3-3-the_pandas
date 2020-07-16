@@ -35,7 +35,7 @@ export default {
     async updateRecipes() {
       try {
         const response = await this.axios.get(
-          "https://panda-recipes.herokuapp.com/recipes/"
+          "https://panda-recipes.herokuapp.com/users/getFavorites"
           // "http://localhost:4000/recipes"
         );
         

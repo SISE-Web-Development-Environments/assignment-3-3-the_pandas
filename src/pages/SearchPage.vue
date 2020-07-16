@@ -161,23 +161,23 @@ export default {
 
 <style lang="scss" scoped>
 .button {
-  color: black;
+  color: rgb(0, 0, 0);
   border-radius: 15px;
   margin-left: 10px;
 }
 .container {
-  color: black;
+  color: rgb(236, 221, 234);
   margin-left: 10px;
 }
 #SortingDiv{
-  color: black;
+  color: rgb(236, 221, 234);
   margin-top: 10px;
 }
 .title {
-  color: black;
+  color: rgb(236, 221, 234);
 }
 .RandomRecipes {
-  color: black;
+  color: rgb(236, 221, 234);
   margin: 10px 0 10px;
 }
 .blur {
