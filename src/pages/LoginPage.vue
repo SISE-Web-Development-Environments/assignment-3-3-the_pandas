@@ -72,19 +72,19 @@ export default {
       form: {
         username: "",
         password: "",
-        submitError: undefined
-      }
+        submitError: undefined,
+      },
     };
   },
   validations: {
     form: {
       username: {
-        required
+        required,
       },
       password: {
-        required
-      }
-    }
+        required,
+      },
+    },
   },
   methods: {
     validateState(param) {
@@ -98,7 +98,7 @@ export default {
           // "http://localhost:4000/login",
           {
             userName: this.form.username,
-            password: this.form.password
+            password: this.form.password,
           }
         );
         // this.$root.loggedIn = true;
@@ -121,12 +121,13 @@ export default {
       // console.log("login method go");
 
       this.Login();
-    }
-  }
+    },
+  },
 };
 </script>
 <style lang="scss" scoped>
 .container {
   max-width: 400px;
+  color: white;
 }
 </style>
