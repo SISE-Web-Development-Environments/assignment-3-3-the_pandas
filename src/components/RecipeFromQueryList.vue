@@ -5,7 +5,11 @@
       <slot></slot>
     </h3>
 
-    <div v-if="is1Column" class="recipesContainer1Column">
+    
+      <b-col v-for="r in recipesArray" :key="r.id">
+        <RecipePreview class="recipePreview" :recipe="r" />
+      </b-col>
+    <!-- <div v-if="is1Column" class="recipesContainer1Column">
       <div v-for="r in recipesArray" :key="r.id">
         <RecipePreview 
         class="recipePreview"
@@ -21,7 +25,7 @@
          :recipe="r"
          :isMyRecipe2="isMyRecipe2" />
       </div>
-    </div>
+    </div> -->
 
     <!-- <div class="recipesContainer" >
       <div v-for="r in recipesArray" :key="r.id">

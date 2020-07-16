@@ -138,7 +138,7 @@ export default {
   margin-right: auto;
   width: 50%;
 }
-/* .recipe-header{
-
-} */
+.container {
+  color:white;
+}
 </style>
