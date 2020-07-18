@@ -28,9 +28,29 @@ const routes = [
     component: () => import("./pages/RecipeViewPage"),
   },
   {
+    path: "/DBrecipe/:recipeId",
+    name: "DBrecipe",
+    component: () => import("./pages/DBRecipePage"),
+  },
+  {
+    path: "/About",
+    name: "about",
+    component: () => import("./pages/About"),
+  },
+  {
     path: "/Favorites",
     name: "favorites",
     component: () => import("./pages/Favorites"),
+  },
+  {
+    path: "/PersonalRecipes",
+    name: "personal",
+    component: () => import("./pages/Personal"),
+  },
+  {
+    path: "/Family",
+    name: "family",
+    component: () => import("./pages/Family"),
   },
   {
     path: "*",

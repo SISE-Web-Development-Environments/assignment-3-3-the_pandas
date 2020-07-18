@@ -1,6 +1,5 @@
 <template>
-  <router-link
-    :to="{ name: 'recipe', params: { recipeId: recipe.id } }"
+  <router-link v-if="recipe.user_id" :to="{ name: 'DBrecipe', query: { recipeId: recipe.id, image: recipe.image, title: recipe.title, instructions:recipe.Instructions, Ingredients:recipe.ingredients } }"
     class="recipe-preview"
   >
   <b-container>
@@ -22,6 +21,47 @@
           <img id="clock" src="https://icons-for-free.com/iconfiles/png/512/done+downloaded+icon-1320086210484717001.png" />
           {{ recipe.aggregateLikes }} likes
            <br>
+           <span v-if="recipe.owner">Owner:  {{ recipe.owner }} </span>
+          <img v-if="recipe.vegetarian" id="clock" src="https://cdn4.iconfinder.com/data/icons/fabric-features-clothes-materials-blue-line-2/64/413_eco-bio-ecology-leaf-512.png" />
+          <img v-if="recipe.glutenFree" id="clock" src="https://cdn1.iconfinder.com/data/icons/eco-food-and-cosmetic-labels/128/Artboard_15-2-128.png" />
+          <img v-if="recipe.Viewed" id="clock" src="https://cdn.iconscout.com/icon/premium/png-512-thumb/eye-382-326435.png" />
+          <br>
+          <br>
+          
+          <br>
+          <img  v-if="recipe.Saved"   id="Favorite"  src="https://cdn3.iconfinder.com/data/icons/gradient-circle/36/5122-512.png" />
+          <img  v-else @click="SaveRecipe(recipe.id)" id="Favorite"  src="https://cdn0.iconfinder.com/data/icons/e-commerce-207/1024/heart-512.png" />
+          <!-- https://cdn3.iconfinder.com/data/icons/gradient-circle/36/5122-512.png https://www.pngkey.com/png/full/293-2934876_heart-gradient-love-heart-symbol.png -->
+        </div>
+        </ul>
+      </b-col>
+      </b-row>
+  </b-container>
+ 
+  </router-link>
+  <router-link v-else :to="{ name: 'recipe', params: { recipeId: recipe.id } }"
+    class="recipe-preview"
+  >
+  <b-container>
+     <div :title="recipe.title" class="recipe-title">
+        {{ recipe.title }}
+      </div>
+      <b-row>
+      <b-col >
+        <div class="recipe-body">
+          <img :src="recipe.image" class="recipe-image" />
+        </div>
+      </b-col>
+      <b-col>
+        <ul>
+         <div class="recipe-footer">
+          <img id="clock" src="https://cdn.iconscout.com/icon/premium/png-256-thumb/clock-2578618-2148597.png" />
+          {{ recipe.readyInMinutes }} minutes
+          <br>
+          <img id="clock" src="https://icons-for-free.com/iconfiles/png/512/done+downloaded+icon-1320086210484717001.png" />
+          {{ recipe.aggregateLikes }} likes
+           <br>
+           <span v-if="recipe.owner">Owner:  {{ recipe.owner }} </span>
           <img v-if="recipe.vegetarian" id="clock" src="https://cdn4.iconfinder.com/data/icons/fabric-features-clothes-materials-blue-line-2/64/413_eco-bio-ecology-leaf-512.png" />
           <img v-if="recipe.glutenFree" id="clock" src="https://cdn1.iconfinder.com/data/icons/eco-food-and-cosmetic-labels/128/Artboard_15-2-128.png" />
           <img v-if="recipe.Viewed" id="clock" src="https://cdn.iconscout.com/icon/premium/png-512-thumb/eye-382-326435.png" />
@@ -83,9 +123,10 @@ export default {
   methods: {
     async SaveRecipe(id) {
       try {
-        console.log("im doing it   " + id);
-        const response = await this.axios.get(
-          "https://panda-recipes.herokuapp.com/users/Favorite/" +
+         console.log("here we go")
+            console.log("im doing it   " + id);
+            const response = await this.axios.get(
+            "https://panda-recipes.herokuapp.com/users/Favorite/" +
             id
           // "http://localhost:4000/users/Favorite/"+this.$route.params.recipeId
         );

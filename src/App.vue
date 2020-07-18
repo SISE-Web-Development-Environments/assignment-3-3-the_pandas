@@ -3,6 +3,7 @@
     <div id="nav">
       <router-link :to="{ name: 'main' }" class="NavItem">Vue Recipes</router-link>|
       <router-link :to="{ name: 'search' }" class="NavItem">Search</router-link>|
+       <router-link :to="{ name: 'about' }" class="NavItem">About</router-link>|
       <!-- {{ !$root.store.username }} -->
       <span v-if="!$root.store.username">
         Guest:
@@ -14,8 +15,8 @@
           <div class="dropbtn"> {{ $root.store.username }}'s profile</div>
           <div class="dropdown-content">
             <router-link :to="{ name: 'favorites' }" class="DropdownItem">Favorites</router-link>
-            <router-link :to="{ name: 'main' }" class="DropdownItem">Family Recipes</router-link>
-            <router-link :to="{ name: 'main' }" class="DropdownItem">Personal Recipes</router-link>
+            <router-link :to="{ name: 'family' }" class="DropdownItem">Family Recipes</router-link>
+            <router-link :to="{ name: 'personal' }" class="DropdownItem">Personal Recipes</router-link>
           </div>
         </div>
         <button id="logoutbtn" @click="Logout">Logout</button>|

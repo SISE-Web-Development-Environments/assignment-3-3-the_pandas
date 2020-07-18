@@ -43,10 +43,12 @@
 <script>
 import RecipePreviewList from "../components/RecipePreviewList";
 import WatchedRecipePreviewList from "../components/WatchedRecipePreviewList";
+import LoginPage from "../pages/LoginPage";
 export default {
   components: {
     RecipePreviewList,
-    WatchedRecipePreviewList
+    WatchedRecipePreviewList,
+    LoginPage
   },
   methods: {
     randomUpdate() {
